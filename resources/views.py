@@ -1,7 +1,12 @@
 from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
+from rest_framework import viewsets
+from .models import Resource, Language, DifficultyLevel, Tag
+from .serializers import ResourceSerializer, LanguageSerializer, DifficultyLevelSerializer, TagSerializer
 
 # Create your views here.
 
-def index(request):
-	return HttpResponse("Holla")
+
+class LanguageViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Language.objects.all()
+    serializer_class = LanguageSerializer

@@ -1,6 +1,10 @@
-from . import views
+from rest_framework.routers import DefaultRouter
+from .views import LanguageViewSet
 from django.urls import path
 
-urlpatterns = [
-    path('', views.index),
-]
+
+router = DefaultRouter()
+router.register(r'languages', LanguageViewSet)
+
+
+urlpatterns = router.urls
