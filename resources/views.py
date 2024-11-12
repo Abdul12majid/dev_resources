@@ -47,3 +47,17 @@ def create_resource(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT'])
+def update_resource(request, resource_id):
+    try:
+        resource = Resource.objects.get(id=resource_id)
+    except Resource.DoesNotExist:
+        return Response({"error": "Resource not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = ResourceSerializer(resource, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

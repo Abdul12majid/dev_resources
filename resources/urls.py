@@ -13,6 +13,7 @@ router.register(r'resources', ResourceViewSet)
 
 urlpatterns = router.urls + [
     path('create/', views.create_resource, name='create-resource'),
+    path('update/<int:resource_id>/', views.update_resource, name='update-resource'),
 
 ]
 
