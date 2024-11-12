@@ -61,3 +61,14 @@ def update_resource(request, resource_id):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def delete_resource(request, resource_id):
+    try:
+        resource = Resource.objects.get(id=resource_id)
+    except Resource.DoesNotExist:
+        return Response({"error": "Resource not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    resource.delete()
+    return Response({"message": "Resource deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
