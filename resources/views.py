@@ -10,3 +10,8 @@ from .serializers import ResourceSerializer, LanguageSerializer, DifficultyLevel
 class LanguageViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Language.objects.all()
     serializer_class = LanguageSerializer
+
+
+class DifficultyLevelViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = DifficultyLevel.objects.all()
+    serializer_class = DifficultyLevelSerializer
