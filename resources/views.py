@@ -3,6 +3,9 @@ from django.http import JsonResponse
 from rest_framework import viewsets
 from .models import Resource, Language, DifficultyLevel, Tag
 from .serializers import ResourceSerializer, LanguageSerializer, DifficultyLevelSerializer, TagSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 
 # Create your views here.
 
@@ -35,3 +38,12 @@ class ResourceViewSet(viewsets.ModelViewSet):
         if difficulty:
             queryset = queryset.filter(difficulty__level=difficulty)
         return queryset
+
+
+@api_view(['POST'])
+def create_resource(request):
+    serializer = ResourceSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
