@@ -15,3 +15,8 @@ class LanguageViewSet(viewsets.ReadOnlyModelViewSet):
 class DifficultyLevelViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = DifficultyLevel.objects.all()
     serializer_class = DifficultyLevelSerializer
+
+
+class TagViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
