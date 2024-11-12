@@ -6,6 +6,7 @@ from .serializers import ResourceSerializer, LanguageSerializer, DifficultyLevel
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from django.urls import reverse
 
 # Create your views here.
 
@@ -72,3 +73,10 @@ def delete_resource(request, resource_id):
 
     resource.delete()
     return Response({"message": "Resource deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'create-resource': request.build_absolute_uri(reverse('create-resource', args=[], kwargs={})),
+    })

@@ -15,6 +15,7 @@ urlpatterns = router.urls + [
     path('create/', views.create_resource, name='create-resource'),
     path('update/<int:resource_id>/', views.update_resource, name='update-resource'),
     path('delete/<int:resource_id>/', views.delete_resource, name='delete-resource'),
+     path('root', views.api_root, name='api-root'), 
 
 ]
 
